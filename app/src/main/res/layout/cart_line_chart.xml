@@ -3,9 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp">
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginTop="12dp">
+
     <lecho.lib.hellocharts.view.LineChartView
         android:id="@+id/lcv_line_chart"
         android:layout_width="match_parent"
-        android:layout_height="130dp" />
+        android:layout_height="130dp"/>
+
 </android.support.v7.widget.CardView>

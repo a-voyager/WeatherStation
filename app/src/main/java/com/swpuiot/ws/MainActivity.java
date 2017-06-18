@@ -5,14 +5,12 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.swpuiot.ws.base.BaseActivity;
 
-import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -66,26 +64,50 @@ public class MainActivity extends BaseActivity {
     private LineChartData data;
 
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        drawLine();
-    }
-
-    @Override
-    protected void initViews() {
 
         mVdWeatherVideo.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_weather));
         mVdWeatherVideo.requestFocus();
         mVdWeatherVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                mp.seekTo(0);
-                mp.start();
+                mVdWeatherVideo.seekTo(0);
+                mVdWeatherVideo.start();
             }
         });
         mVdWeatherVideo.start();
+
+
+        drawLine();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mVdWeatherVideo.resume();
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mVdWeatherVideo.pause();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mVdWeatherVideo.stopPlayback();
+    }
+
+    @Override
+    protected void initViews() {
+
+
     }
 
     @Override
