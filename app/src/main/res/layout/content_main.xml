@@ -10,7 +10,6 @@
     tools:context="com.swpuiot.ws.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <include layout="@layout/card_top"/>
 
 
     <include layout="@layout/card_wind"/>

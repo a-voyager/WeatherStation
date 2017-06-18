@@ -1,7 +1,6 @@
 package com.swpuiot.ws.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +29,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutResID());
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
+        initViews();
     }
+
+    protected abstract void initViews();
 
     protected abstract int getLayoutResID();
 }
