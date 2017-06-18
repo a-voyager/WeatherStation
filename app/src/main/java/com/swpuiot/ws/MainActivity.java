@@ -2,16 +2,20 @@ package com.swpuiot.ws;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 import com.swpuiot.ws.base.BaseActivity;
+
+import butterknife.BindView;
 
 
 public class MainActivity extends BaseActivity {
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override

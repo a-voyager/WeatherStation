@@ -25,10 +25,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     Toolbar mToolbar;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        ButterKnife.bind(this);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(getLayoutResID());
+        ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
     }
 

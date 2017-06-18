@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical">
-
-    <SurfaceView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"/>
+             android:layout_height="200dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="null"
+        android:layout_height="match_parent"
+        android:background="#7c8eec"
         android:orientation="vertical">
 
         <TextView
@@ -20,9 +15,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:hint="26℃"
-            android:textColor="#fff"
-            android:textScaleX="26sp"/>
+            android:text="26℃"
+            android:textColor="#e6e2e2"
+            android:textSize="26sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,29 +30,30 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
-                android:hint="晴"
-                android:textColor="#fff"
-                android:textColorHighlight="16dp"/>
+                android:text="晴"
+                android:textColor="#e6e2e2"
+                android:textSize="16dp"/>
 
             <TextView
                 android:id="@+id/tt_window_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.6"
+                android:layout_weight="1.77"
                 android:gravity="start"
-                android:hint="新都大道 四川 成都"
-                android:textColor="#fff"
-                android:textColorHighlight="16dp"/>
+                android:text="新都大道 四川 成都"
+                android:textColor="#e6e2e2"
+                android:textSize="16dp"/>
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="80dp"/>
+            android:layout_height="60dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="6dp">
 
             <LinearLayout
                 android:id="@+id/ll_window_air_quality"
@@ -79,18 +75,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="end|bottom"
-                        android:hint="79//42"
-                        android:textColor="#fff"
-                        android:textScaleX="18dp"/>
+                        android:text="79//42"
+                        android:textColor="#e6e2e2"
+                        android:textSize="18dp"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="0.88"
                         android:gravity="start|bottom"
-                        android:hint="PM2.5"
-                        android:textColor="#fff"
-                        android:textScaleX="12dp"/>
+                        android:text="PM2.5"
+                        android:textColor="#e6e2e2"
+                        android:textSize="12dp"/>
                 </LinearLayout>
 
 
@@ -100,9 +96,9 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="top|center"
-                    android:hint="轻度污染"
-                    android:textColor="#fff"
-                    android:textScaleX="14dp"/>
+                    android:text="轻度污染"
+                    android:textColor="#e6e2e2"
+                    android:textSize="14dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -122,22 +118,22 @@
                     <TextView
                         android:id="@+id/tt_window_air_temp"
                         android:layout_width="0dp"
-                        android:layout_marginLeft="10dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:layout_weight="1.38"
                         android:gravity="end|bottom"
-                        android:hint="29//20"
-                        android:textColor="#fff"
-                        android:textScaleX="18dp"/>
+                        android:text="29//20"
+                        android:textColor="#e6e2e2"
+                        android:textSize="18dp"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="start|bottom"
-                        android:hint="℃"
-                        android:textColor="#fff"
-                        android:textScaleX="12dp"/>
+                        android:text="℃"
+                        android:textColor="#e6e2e2"
+                        android:textSize="12dp"/>
                 </LinearLayout>
 
 
@@ -146,10 +142,11 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="top|center"
-                    android:hint="温度"
-                    android:textColor="#fff"
-                    android:textScaleX="14dp"/>
+                    android:text="温度"
+                    android:textColor="#e6e2e2"
+                    android:textSize="14dp"/>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_window_air_hump"
                 android:layout_width="0dp"
@@ -170,18 +167,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.56"
                         android:gravity="end|bottom"
-                        android:hint="79//42"
-                        android:textColor="#fff"
-                        android:textScaleX="18dp"/>
+                        android:text="79//42"
+                        android:textColor="#e6e2e2"
+                        android:textSize="18dp"/>
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="start|bottom"
-                        android:hint="RH"
-                        android:textColor="#fff"
-                        android:textScaleX="12dp"/>
+                        android:text="RH"
+                        android:textColor="#e6e2e2"
+                        android:textSize="12dp"/>
                 </LinearLayout>
 
 
@@ -190,9 +187,9 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="top|center"
-                    android:hint="湿度"
-                    android:textColor="#fff"
-                    android:textScaleX="14dp"/>
+                    android:text="湿度"
+                    android:textColor="#e6e2e2"
+                    android:textSize="14dp"/>
             </LinearLayout>
 
         </LinearLayout>
