@@ -1,24 +1,24 @@
 package com.swpuiot.ws;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 
-import butterknife.BindView;
-
-
-public class MainActivity extends AppCompatActivity {
+import com.swpuiot.ws.base.BaseActivity;
 
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+public class MainActivity extends BaseActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setSupportActionBar(toolbar);
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
 
+    }
+
+    @Override
+    protected int getLayoutResID() {
+        return R.layout.activity_main;
     }
 
 }
