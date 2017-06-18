@@ -41,6 +41,7 @@
                 android:textSize="16dp"/>
 
             <TextView
+                android:layout_marginLeft="3dp"
                 android:id="@+id/tt_window_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
