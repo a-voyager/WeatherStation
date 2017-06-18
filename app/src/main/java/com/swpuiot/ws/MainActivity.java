@@ -5,6 +5,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -60,6 +63,8 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.lcv_line_chart)
     LineChartView lineChartView;
+    @BindView(R.id.iv_curr_video)
+    ImageView mIvCurrVideo;
     private FixedQueue<PointValue> mFixedQueue;
     private LineChartData mChartData;
 
@@ -121,8 +126,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-
-
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_anim);
+        mIvCurrVideo.startAnimation(animation);
     }
 
     @Override
