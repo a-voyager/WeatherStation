@@ -24,7 +24,7 @@
     </style>
 
     <style name="TitleTransparent">
-        <item name="android:textColor">#0000</item>
+        <item name="android:textColor">#0FFF</item>
     </style>
 
 </resources>

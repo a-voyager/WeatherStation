@@ -11,8 +11,9 @@
     tools:showIn="@layout/activity_main">
 
 
-
     <include layout="@layout/card_wind"/>
 
     <include layout="@layout/cart_line_chart"/>
+
+
 </LinearLayout>
