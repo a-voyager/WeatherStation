@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        addChartValue(random.nextInt(32));
+                        addChartValue(random.nextInt(16));
                     }
                 });
             }

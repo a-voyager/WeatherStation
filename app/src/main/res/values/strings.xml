@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">WeatherStation</string>
+    <string name="app_name">气象监测站</string>
     <string name="action_settings">Settings</string>
 </resources>
