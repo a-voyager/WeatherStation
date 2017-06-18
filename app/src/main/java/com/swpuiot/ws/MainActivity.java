@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.swpuiot.ws.base.BaseActivity;
+import com.swpuiot.ws.ui.CropVideoView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.tv_wind_desc)
     TextView mTvWindDesc;
     @BindView(R.id.vd_weather_video)
-    VideoView mVdWeatherVideo;
+    CropVideoView mVdWeatherVideo;
 
     @BindView(R.id.lcv_line_chart)
     LineChartView lineChartView;
