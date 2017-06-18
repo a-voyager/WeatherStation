@@ -12,4 +12,7 @@
 
     <include layout="@layout/card_top"/>
 
+
+    <include layout="@layout/card_wind"/>
+
 </LinearLayout>

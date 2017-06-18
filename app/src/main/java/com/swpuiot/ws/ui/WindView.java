@@ -17,7 +17,7 @@ import top.wuhaojie.lib.utils.DensityUtil;
  * Version: 1.0
  */
 public class WindView extends View {
-    private static final int DEFAULT_COLOR = Color.WHITE;
+    private static final int DEFAULT_COLOR = Color.GRAY;
     private static final int DEFAULT_WIDTH = 1;//画笔宽度1dp
     private static final float LENGTH_1 = 5;//下面三角形高度5dp
     private static final float ALPHA = (float) (Math.PI / 6);//旋转角度
