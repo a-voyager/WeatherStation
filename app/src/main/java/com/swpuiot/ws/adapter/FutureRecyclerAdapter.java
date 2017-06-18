@@ -21,14 +21,14 @@ import top.wuhaojie.lib.image.ImageLoader;
 /**
  * Created by 羊荣毅_L on 2017/6/18.
  */
-public class FutureRecycAdapter extends RecyclerView.Adapter<FutureRecycHolder> {
+public class FutureRecyclerAdapter extends RecyclerView.Adapter<FutureRecycHolder> {
     private Context mContext;
     private LayoutInflater mInflater;
     private MyItemClickListener mClickListener;
     private MyItemLongClickListener mLongClickListener;
     private List<FutureDay> mFutureDays;
 
-    public FutureRecycAdapter(Context context, List<FutureDay> futureDays) {
+    public FutureRecyclerAdapter(Context context, List<FutureDay> futureDays) {
         mContext = context;
         mInflater = LayoutInflater.from(context);
         mFutureDays = futureDays;
