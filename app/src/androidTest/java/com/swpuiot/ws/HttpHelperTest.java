@@ -19,6 +19,12 @@ import rx.functions.Action1;
 @RunWith(AndroidJUnit4.class)
 public class HttpHelperTest {
     @Test
+    public void suggestion() throws Exception {
+        HttpHelper.get().suggestion("成都", "zh", System.out::println);
+        while (true) ;
+    }
+
+    @Test
     public void get() throws Exception {
 
     }
