@@ -76,6 +76,9 @@ class FutureRecycHolder extends RecyclerView.ViewHolder implements View.OnClickL
     public FutureRecycHolder(View itemView, MyItemClickListener clickListener, MyItemLongClickListener longClickListener) {
         super(itemView);
         weatherLogo = (ImageView) itemView.findViewById(R.id.img_weather_logo);
+        weekday= (TextView) itemView.findViewById(R.id.tv_weekday);
+        stat= (TextView) itemView.findViewById(R.id.tv_weather_air_stat);
+        temp= (TextView) itemView.findViewById(R.id.tv_weekday_temp);
         mClickListener = clickListener;
         mLongClickListener = longClickListener;
         itemView.setOnClickListener(this);

@@ -16,11 +16,13 @@
         android:orientation="vertical">
 
 
-    <include layout="@layout/card_wind"/>
+        <include layout="@layout/card_wind"/>
 
         <include layout="@layout/cart_line_chart"/>
 
         <include layout="@layout/cart_video"/>
+
+        <include layout="@layout/card_future"/>
 
 
     </LinearLayout>

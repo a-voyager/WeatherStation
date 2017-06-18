@@ -5,14 +5,22 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.swpuiot.ws.adapter.FutureRecycAdapter;
 import com.swpuiot.ws.base.BaseActivity;
+import com.swpuiot.ws.clicklistener.MyItemClickListener;
+import com.swpuiot.ws.clicklistener.MyItemLongClickListener;
 import com.swpuiot.ws.ds.FixedQueue;
+import com.swpuiot.ws.entities.FutureDay;
 import com.swpuiot.ws.ui.CropVideoView;
 
 import java.util.ArrayList;
@@ -68,6 +76,8 @@ public class MainActivity extends BaseActivity {
     private FixedQueue<PointValue> mFixedQueue;
     private LineChartData mChartData;
 
+    @BindView(R.id.rcv_future)
+    RecyclerView futureRecyclr;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -126,8 +136,28 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_anim);
-        mIvCurrVideo.startAnimation(animation);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        List<FutureDay> futureDays=new ArrayList<>();{
+            futureDays.add(new FutureDay(R.drawable.ic_daxue,"周一","大雪 | 良","27/19"));
+            futureDays.add(new FutureDay(R.drawable.ic_cloudy,"周二","多云 | 良","27/19"));
+            futureDays.add(new FutureDay(R.drawable.ic_dayu,"周三","大雨 | 良","27/19"));
+            futureDays.add(new FutureDay(R.drawable.ic_sun,"周四","晴 | 良","27/19"));
+        }
+        FutureRecycAdapter adapter=new FutureRecycAdapter(this,futureDays);
+        futureRecyclr.setLayoutManager(layoutManager);
+        futureRecyclr.setAdapter(adapter);
+        adapter.setClickListener(new MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(MainActivity.this,"点击了第"+position+"个item",Toast.LENGTH_SHORT).show();
+            }
+        });
+        adapter.setLongClickListener(new MyItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Toast.makeText(MainActivity.this,"长按了第"+position+"个item",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
