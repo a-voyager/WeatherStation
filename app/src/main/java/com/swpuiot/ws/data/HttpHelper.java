@@ -1,6 +1,7 @@
 package com.swpuiot.ws.data;
 
 import com.swpuiot.ws.entities.response.ForecastResponse;
+import com.swpuiot.ws.entities.response.SuggestResponse;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -42,6 +43,13 @@ public class HttpHelper {
     public void forecast(String city, String language, final Action1<? super ForecastResponse> onNext) {
         mWeatherNetApi
                 .forecast(city, WeatherNetApi.KEY, language)
+                .compose(new TransThread<>())
+                .subscribe(onNext);
+    }
+
+    public void suggestion(String city, String language, final Action1<? super SuggestResponse> onNext) {
+        mWeatherNetApi
+                .suggestion(city, WeatherNetApi.KEY, language)
                 .compose(new TransThread<>())
                 .subscribe(onNext);
     }

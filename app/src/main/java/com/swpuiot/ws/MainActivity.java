@@ -20,6 +20,7 @@ import com.swpuiot.ws.data.HttpHelper;
 import com.swpuiot.ws.ds.FixedQueue;
 import com.swpuiot.ws.entities.FutureDay;
 import com.swpuiot.ws.entities.response.ForecastResponse;
+import com.swpuiot.ws.entities.response.SuggestResponse;
 import com.swpuiot.ws.ui.CropVideoView;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.view.LineChartView;
+import rx.functions.Action1;
 
 
 public class MainActivity extends BaseActivity {
@@ -105,7 +107,14 @@ public class MainActivity extends BaseActivity {
         new Timer().schedule(task, 0, 1000);
 
 
-        HttpHelper.get().forecast("成都", "zh", forecastResponse -> handleForecastResponse(forecastResponse));
+        HttpHelper.get().forecast("成都", "zh", this::handleForecastResponse);
+
+        HttpHelper.get().suggestion("成都", "zh", new Action1<SuggestResponse>() {
+            @Override
+            public void call(SuggestResponse suggestResponse) {
+                Log.d(TAG, "call: " + suggestResponse);
+            }
+        });
 
     }
 
