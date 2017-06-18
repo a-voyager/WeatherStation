@@ -20,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -38,4 +42,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':lib')
     compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    compile 'me.tatarka:gradle-retrolambda:3.5.0'
 }

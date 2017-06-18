@@ -1,13 +1,12 @@
 package com.swpuiot.ws;
 
 import android.graphics.Color;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -17,10 +16,10 @@ import android.widget.Toast;
 
 import com.swpuiot.ws.adapter.FutureRecyclerAdapter;
 import com.swpuiot.ws.base.BaseActivity;
-import com.swpuiot.ws.clicklistener.MyItemClickListener;
-import com.swpuiot.ws.clicklistener.MyItemLongClickListener;
+import com.swpuiot.ws.data.HttpHelper;
 import com.swpuiot.ws.ds.FixedQueue;
 import com.swpuiot.ws.entities.FutureDay;
+import com.swpuiot.ws.entities.response.ForecastResponse;
 import com.swpuiot.ws.ui.CropVideoView;
 
 import java.util.ArrayList;
@@ -39,6 +38,8 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class MainActivity extends BaseActivity {
 
+
+    public static final String TAG = "MainActivity";
 
     @BindView(R.id.tt_window_temp)
     TextView mTtWindowTemp;
@@ -85,12 +86,9 @@ public class MainActivity extends BaseActivity {
 
         mVdWeatherVideo.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_weather));
         mVdWeatherVideo.requestFocus();
-        mVdWeatherVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mVdWeatherVideo.seekTo(0);
-                mVdWeatherVideo.start();
-            }
+        mVdWeatherVideo.setOnCompletionListener(mp -> {
+            mVdWeatherVideo.seekTo(0);
+            mVdWeatherVideo.start();
         });
         mVdWeatherVideo.start();
 
@@ -101,15 +99,13 @@ public class MainActivity extends BaseActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        addChartValue(random.nextInt(16));
-                    }
-                });
+                runOnUiThread(() -> addChartValue(random.nextInt(16)));
             }
         };
         new Timer().schedule(task, 0, 1000);
+
+
+        HttpHelper.get().forecast("成都", "zh", forecastResponse -> handleForecastResponse(forecastResponse));
 
     }
 
@@ -150,18 +146,9 @@ public class MainActivity extends BaseActivity {
         FutureRecyclerAdapter adapter = new FutureRecyclerAdapter(this, futureDays);
         futureRecyclr.setLayoutManager(layoutManager);
         futureRecyclr.setAdapter(adapter);
-        adapter.setClickListener(new MyItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this, "点击了第" + position + "个item", Toast.LENGTH_SHORT).show();
-            }
-        });
-        adapter.setLongClickListener(new MyItemLongClickListener() {
-            @Override
-            public void onItemLongClick(View view, int position) {
-                Toast.makeText(MainActivity.this, "长按了第" + position + "个item", Toast.LENGTH_SHORT).show();
-            }
-        });
+        adapter.setClickListener((view, position) -> Toast.makeText(MainActivity.this, "点击了第" + position + "个item", Toast.LENGTH_SHORT).show());
+        adapter.setLongClickListener((view, position) -> Toast.makeText(MainActivity.this, "长按了第" + position + "个item", Toast.LENGTH_SHORT).show());
+
     }
 
     @Override
@@ -210,8 +197,16 @@ public class MainActivity extends BaseActivity {
         }
         mFixedQueue.offer(new PointValue(mFixedQueue.getCapacity() - 1, y));
         lineChartView.setLineChartData(mChartData);
+    }
 
 
+    /**
+     * 获取3天天气预报 网络访问成功后回调
+     *
+     * @param forecastResponse 返回对象
+     */
+    private void handleForecastResponse(ForecastResponse forecastResponse) {
+        Log.d(TAG, forecastResponse.toString());
     }
 
 }
