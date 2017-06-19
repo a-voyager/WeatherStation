@@ -1,6 +1,7 @@
 package com.swpuiot.ws.data;
 
 import com.swpuiot.ws.entities.response.ForecastResponse;
+import com.swpuiot.ws.entities.response.HourlyResponse;
 import com.swpuiot.ws.entities.response.SuggestResponse;
 
 import retrofit2.http.GET;
@@ -27,5 +28,8 @@ public interface WeatherNetApi {
     @GET("suggestion")
     Observable<SuggestResponse> suggestion(@Query("city") String city, @Query("key") String key, @Query("lang") String language);
 
+
+    @GET("hourly")
+    Observable<HourlyResponse> hourly(@Query("city") String city, @Query("key") String key);
 
 }

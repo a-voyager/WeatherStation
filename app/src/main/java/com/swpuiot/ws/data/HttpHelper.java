@@ -1,6 +1,9 @@
 package com.swpuiot.ws.data;
 
+import android.util.Log;
+
 import com.swpuiot.ws.entities.response.ForecastResponse;
+import com.swpuiot.ws.entities.response.HourlyResponse;
 import com.swpuiot.ws.entities.response.SuggestResponse;
 
 import rx.Observable;
@@ -18,6 +21,7 @@ import top.wuhaojie.lib.http.RetrofitHttpHelper;
 
 public class HttpHelper {
 
+    public static final String TAG = "HttpHelper";
     private volatile static HttpHelper mHttpHelper;
 
     private final CommonApi mCommonApi;
@@ -54,12 +58,21 @@ public class HttpHelper {
                 .subscribe(onNext);
     }
 
+    public void hourly(String city, final Action1<? super HourlyResponse> onNext) {
+        mWeatherNetApi
+                .hourly(city, WeatherNetApi.KEY)
+                .compose(new TransThread<>())
+                .subscribe(onNext);
+    }
+
+
     private class TransThread<H> implements Observable.Transformer<H, H> {
 
         @Override
         public Observable<H> call(Observable<H> hObservable) {
             return hObservable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
+                    .doOnError(throwable -> Log.e(TAG, "error: " + throwable))
                     .unsubscribeOn(Schedulers.io());
         }
     }
