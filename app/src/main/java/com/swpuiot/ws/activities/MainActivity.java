@@ -1,4 +1,4 @@
-package com.swpuiot.ws;
+package com.swpuiot.ws.activities;
 
 import android.graphics.Color;
 import android.net.Uri;
@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.swpuiot.ws.R;
 import com.swpuiot.ws.adapter.FutureRecyclerAdapter;
 import com.swpuiot.ws.base.BaseActivity;
 import com.swpuiot.ws.data.HttpHelper;
@@ -21,6 +22,7 @@ import com.swpuiot.ws.ds.FixedQueue;
 import com.swpuiot.ws.entities.FutureDay;
 import com.swpuiot.ws.entities.response.ForecastResponse;
 import com.swpuiot.ws.ui.CropVideoView;
+import com.swpuiot.ws.utils.IntentManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +31,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
@@ -55,8 +58,6 @@ public class MainActivity extends BaseActivity {
     LinearLayout mLlWindowAirQuality;
     @BindView(R.id.tt_window_air_temp)
     TextView mTtWindowAirTemp;
-    @BindView(R.id.ll_window_air_temp)
-    LinearLayout mLlWindowAirTemp;
     @BindView(R.id.tt_window_air_hump)
     TextView mTtWindowAirHump;
     @BindView(R.id.ll_window_air_hump)
@@ -74,23 +75,33 @@ public class MainActivity extends BaseActivity {
     LineChartView lineChartView;
     @BindView(R.id.iv_curr_video)
     ImageView mIvCurrVideo;
+
     private FixedQueue<PointValue> mFixedQueue;
     private LineChartData mChartData;
 
     @BindView(R.id.rcv_future)
     RecyclerView futureRecyclr;
 
+
+    @OnClick(R.id.ll_window_air_temp)
+    void onTemperatureClick() {
+        startActivity(IntentManager.toTemperatureActivity(this));
+    }
+
+    @OnClick(R.id.card_video)
+    void onVideoCardClick() {
+        startActivity(IntentManager.toVideoActivity(this));
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mVdWeatherVideo.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_weather));
-        mVdWeatherVideo.requestFocus();
         mVdWeatherVideo.setOnCompletionListener(mp -> {
             mVdWeatherVideo.seekTo(0);
             mVdWeatherVideo.start();
         });
-        mVdWeatherVideo.start();
 
         drawLine();
 
@@ -114,7 +125,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        mVdWeatherVideo.resume();
+        mVdWeatherVideo.start();
     }
 
 

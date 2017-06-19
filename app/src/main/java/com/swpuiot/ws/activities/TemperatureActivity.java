@@ -1,10 +1,11 @@
-package com.swpuiot.ws;
+package com.swpuiot.ws.activities;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.swpuiot.ws.R;
 import com.swpuiot.ws.base.BaseActivity;
 import com.swpuiot.ws.data.HttpHelper;
 import com.swpuiot.ws.entities.response.SuggestResponse;
