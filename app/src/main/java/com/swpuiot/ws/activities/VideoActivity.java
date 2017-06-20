@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.swpuiot.ws.R;
 import com.swpuiot.ws.adapter.HourlyListAdapter;
@@ -52,10 +53,21 @@ public class VideoActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
+
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mHourlyListAdapter = new HourlyListAdapter(this);
         mRvHourly.setAdapter(mHourlyListAdapter);
         mRvHourly.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRvHourly.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) finish();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
