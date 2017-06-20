@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Normal">
+
+        <EditTextPreference
+            android:defaultValue="@string/media_addr"
+            android:key="MEDIA_SERVER"
+            android:summary="Server address for video, start with &quot;http&quot; or &quot;rmtp&quot;"
+            android:title="Media Server"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

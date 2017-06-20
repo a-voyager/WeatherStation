@@ -22,7 +22,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import io.vov.vitamio.LibsChecker;
+import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.VideoView;
+import top.wuhaojie.lib.utils.PreferenceUtils;
 
 import static io.vov.vitamio.MediaPlayer.MEDIA_INFO_BUFFERING_END;
 import static io.vov.vitamio.MediaPlayer.MEDIA_INFO_BUFFERING_START;
@@ -54,24 +56,32 @@ public class VideoActivity extends BaseActivity {
     private void initVideo() {
         if (!LibsChecker.checkVitamioLibs(this))
             return;
-//        mVdVideo.setVideoPath("http://cdn.moji.com/websrc/video/video314.mp4");
-        mVdVideo.setVideoPath(Constants.MEDIA_SERVER_URL);
+        String url = PreferenceUtils.getInstance(this).getStringParam(Constants.CONFIG_KEY.MEDIA_SERVER, Constants.MEDIA_SERVER_URL);
+        mVdVideo.setVideoPath(url);
+        mTvBufferPercent.setVisibility(View.VISIBLE);
+        mTvBufferPercent.setText("请稍后...");
+        mVdVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mTvBufferPercent.setVisibility(View.INVISIBLE);
+            }
+        });
         mVdVideo.setOnErrorListener((mp, what, extra) -> {
             Log.d(TAG, "onError: " + what);
             return true;
         });
         mVdVideo.setOnBufferingUpdateListener((mp, percent) -> {
-            mTvBufferPercent.setText("缓冲中..." + percent + "%");
+//            mTvBufferPercent.setText("缓冲中..." + percent + "%");
         });
         mVdVideo.setOnInfoListener((mp, what, extra) -> {
             switch (what) {
                 case MEDIA_INFO_BUFFERING_START:
                     Log.d(TAG, "onInfo: BUFFERING_START");
-                    mTvBufferPercent.setVisibility(View.VISIBLE);
+//                    mTvBufferPercent.setVisibility(View.VISIBLE);
                     break;
                 case MEDIA_INFO_BUFFERING_END:
                     Log.d(TAG, "onInfo: BUFFERING_END");
-                    mTvBufferPercent.setVisibility(View.INVISIBLE);
+//                    mTvBufferPercent.setVisibility(View.INVISIBLE);
                     break;
             }
             return true;

@@ -48,23 +48,32 @@ public class HttpHelper {
         mWeatherNetApi
                 .forecast(city, WeatherNetApi.KEY, language)
                 .compose(new TransThread<>())
-                .subscribe(onNext);
+                .subscribe(onNext, mErrorHandler);
     }
 
     public void suggestion(String city, String language, final Action1<? super SuggestResponse> onNext) {
         mWeatherNetApi
                 .suggestion(city, WeatherNetApi.KEY, language)
                 .compose(new TransThread<>())
-                .subscribe(onNext);
+                .subscribe(onNext, mErrorHandler);
     }
 
     public void hourly(String city, final Action1<? super HourlyResponse> onNext) {
         mWeatherNetApi
                 .hourly(city, WeatherNetApi.KEY)
                 .compose(new TransThread<>())
-                .subscribe(onNext);
+                .subscribe(onNext, mErrorHandler);
     }
 
+    private OnError mErrorHandler = new OnError();
+
+    private class OnError implements Action1<Throwable> {
+
+        @Override
+        public void call(Throwable throwable) {
+            Log.d(TAG, "call: 访问错误!" + throwable.getMessage());
+        }
+    }
 
     private class TransThread<H> implements Observable.Transformer<H, H> {
 
@@ -72,7 +81,6 @@ public class HttpHelper {
         public Observable<H> call(Observable<H> hObservable) {
             return hObservable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .doOnError(throwable -> Log.e(TAG, "error: " + throwable))
                     .unsubscribeOn(Schedulers.io());
         }
     }

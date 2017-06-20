@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">气象监测站</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">设置</string>
     <string name="title_activity_temperature">温度详情</string>
     <string name="title_activity_video">实时气象</string>
+    <string name="title_activity_settings">设置</string>
+    <string name="media_addr">rtmp://115.159.95.196:1935/oflaDemo/stream1497576771208</string>
+
 </resources>
