@@ -80,6 +80,9 @@
     <color name="red14">#FFE4E4</color>
 
 
+    <color name="light_blue">#cc3c5f80</color>
     <color name="dark_blue">#3C5F80</color>
+    <color name="dark_gray">#9000</color>
+    <color name="light_gray">#3000</color>
 
 </resources>

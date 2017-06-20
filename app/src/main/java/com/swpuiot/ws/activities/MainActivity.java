@@ -3,9 +3,7 @@ package com.swpuiot.ws.activities;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.FileObserver;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -114,7 +112,7 @@ public class MainActivity extends BaseActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                runOnUiThread(() -> addChartValue(random.nextInt(16)));
+                addChartValue(random.nextInt(16));
             }
         };
         new Timer().schedule(task, 0, 1000);
