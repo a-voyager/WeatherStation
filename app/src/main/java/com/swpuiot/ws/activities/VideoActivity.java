@@ -2,6 +2,7 @@ package com.swpuiot.ws.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -54,6 +55,7 @@ public class VideoActivity extends BaseActivity {
         mHourlyListAdapter = new HourlyListAdapter(this);
         mRvHourly.setAdapter(mHourlyListAdapter);
         mRvHourly.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRvHourly.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
     }
 
     @Override
