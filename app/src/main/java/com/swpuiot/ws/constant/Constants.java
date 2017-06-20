@@ -8,4 +8,5 @@ package com.swpuiot.ws.constant;
  */
 
 public interface Constants {
+    String MEDIA_SERVER_URL = "rtmp://115.159.95.196:1935/oflaDemo/stream1497576771208";
 }
