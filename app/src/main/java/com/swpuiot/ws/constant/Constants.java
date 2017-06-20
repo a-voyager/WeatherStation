@@ -13,6 +13,7 @@ public interface Constants {
 
     interface CONFIG_KEY {
         String MEDIA_SERVER = "MEDIA_SERVER";
+        String NORMAL_SERVER = "NORMAL_SERVER";
     }
 
 }

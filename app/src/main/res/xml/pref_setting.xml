@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="Normal">
+    <PreferenceCategory android:title="常规">
 
         <EditTextPreference
             android:defaultValue="@string/media_addr"
             android:key="MEDIA_SERVER"
-            android:summary="Server address for video, start with &quot;http&quot; or &quot;rmtp&quot;"
-            android:title="Media Server"/>
+            android:summary="RTMP 服务器地址, 使用&quot;http://&quot;或&quot;rmtp://&quot;开始"
+            android:title="媒体服务器"/>
+
+        <EditTextPreference
+            android:key="NORMAL_SERVER"
+            android:summary="常规服务器地址, 使用&quot;http://&quot;, 以&quot;/&quot;结束"
+            android:title="主服务器"/>
 
     </PreferenceCategory>
 

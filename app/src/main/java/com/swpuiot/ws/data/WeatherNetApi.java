@@ -15,7 +15,7 @@ import rx.Observable;
  * Version: 1.0
  */
 
-public interface WeatherNetApi {
+interface WeatherNetApi {
 
     String BASE_URL = "https://free-api.heweather.com/v5/";
     String KEY = "9ec533308d184fce963275fe0dae2378";

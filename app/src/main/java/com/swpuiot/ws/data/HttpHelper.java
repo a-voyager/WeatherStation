@@ -2,6 +2,8 @@ package com.swpuiot.ws.data;
 
 import android.util.Log;
 
+import com.swpuiot.ws.App;
+import com.swpuiot.ws.constant.Constants;
 import com.swpuiot.ws.entities.response.ForecastResponse;
 import com.swpuiot.ws.entities.response.HourlyResponse;
 import com.swpuiot.ws.entities.response.SuggestResponse;
@@ -11,6 +13,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import top.wuhaojie.lib.http.RetrofitHttpHelper;
+import top.wuhaojie.lib.utils.PreferenceUtils;
 
 /**
  * Author: wuhaojie
@@ -28,7 +31,8 @@ public class HttpHelper {
     private final WeatherNetApi mWeatherNetApi;
 
     private HttpHelper() {
-        mCommonApi = new RetrofitHttpHelper<>(CommonApi.BASE_URL, CommonApi.class).getService();
+        String commonUrl = PreferenceUtils.getInstance(App.getContext()).getStringParam(Constants.CONFIG_KEY.NORMAL_SERVER, CommonApi.BASE_URL);
+        mCommonApi = new RetrofitHttpHelper<>(commonUrl, CommonApi.class).getService();
         mWeatherNetApi = new RetrofitHttpHelper<>(WeatherNetApi.BASE_URL, WeatherNetApi.class).getService();
     }
 
