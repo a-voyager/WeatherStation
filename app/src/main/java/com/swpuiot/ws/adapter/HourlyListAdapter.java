@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.swpuiot.ws.R;
+import com.swpuiot.ws.utils.CodeTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +95,13 @@ public class HourlyListAdapter extends RecyclerView.Adapter {
         }
 
         void setView(Item item) {
-            // TODO: 17-6-19 设置单项 UI
+            mTvDate.setText(item.date.split(" ")[1]);
+            mIvIcon.setImageResource(CodeTransformer.getWeatherIcon(Integer.parseInt(item.condCode)));
+            mTvCond.setText(item.condTxt);
+            mTvTmp.setText(item.tmp + "℃");
+            mTvWindDir.setText(item.wind_dir);
+            mTvHum.setText(item.hum + "H");
+            mTvWindSc.setText(item.wind_sc);
         }
 
     }
