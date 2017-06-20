@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"/>
+
+    <ImageView
+        android:id="@+id/img_advise_logo"
+        android:layout_width="40dp"
+        android:layout_height="88dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_101"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_advise_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center|start"
+            android:text="穿衣指数—热"
+            android:textColor="#363535"
+            android:textSize="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_advise_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:layout_weight="3"
+            android:text="气象条件较不利于空气污染物稀释、扩散和清除，请适当减少室外活动时间"
+            android:textColor="#7c7c7c"
+            android:textSize="12dp"/>
+    </LinearLayout>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"/>
+
+</LinearLayout>

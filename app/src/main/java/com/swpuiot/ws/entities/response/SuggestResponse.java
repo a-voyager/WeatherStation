@@ -238,7 +238,7 @@ public class SuggestResponse {
                 /**
                  * brf : 较差
                  * txt : 气象条件较不利于空气污染物稀释、扩散和清除，请适当减少室外活动时间。
-                 */
+                        */
 
                 private String brf;
                 private String txt;
