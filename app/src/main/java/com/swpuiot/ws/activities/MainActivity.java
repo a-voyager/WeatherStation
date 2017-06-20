@@ -3,7 +3,9 @@ package com.swpuiot.ws.activities;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.FileObserver;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +24,8 @@ import com.swpuiot.ws.ds.FixedQueue;
 import com.swpuiot.ws.entities.FutureDay;
 import com.swpuiot.ws.entities.response.ForecastResponse;
 import com.swpuiot.ws.ui.CropVideoView;
+import com.swpuiot.ws.utils.CodeTransformer;
+import com.swpuiot.ws.utils.DateUtils;
 import com.swpuiot.ws.utils.IntentManager;
 
 import java.util.ArrayList;
@@ -147,20 +151,6 @@ public class MainActivity extends BaseActivity {
 
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_anim);
         mIvCurrVideo.startAnimation(animation);
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        List<FutureDay> futureDays = new ArrayList<>();
-        futureDays.add(new FutureDay(R.drawable.ic_daxue, "周一", "大雪 | 良", "27/19"));
-        futureDays.add(new FutureDay(R.drawable.ic_cloudy, "周二", "多云 | 良", "27/19"));
-        futureDays.add(new FutureDay(R.drawable.ic_dayu, "周三", "大雨 | 良", "27/19"));
-        futureDays.add(new FutureDay(R.drawable.ic_sun, "周四", "晴 | 良", "27/19"));
-
-        FutureRecyclerAdapter adapter = new FutureRecyclerAdapter(this, futureDays);
-        futureRecyclr.setLayoutManager(layoutManager);
-        futureRecyclr.setAdapter(adapter);
-        adapter.setClickListener((view, position) -> Toast.makeText(MainActivity.this, "点击了第" + position + "个item", Toast.LENGTH_SHORT).show());
-        adapter.setLongClickListener((view, position) -> Toast.makeText(MainActivity.this, "长按了第" + position + "个item", Toast.LENGTH_SHORT).show());
-
     }
 
     @Override
@@ -219,6 +209,22 @@ public class MainActivity extends BaseActivity {
      */
     private void handleForecastResponse(ForecastResponse forecastResponse) {
         Log.d(TAG, forecastResponse.toString());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        List<FutureDay> futureDays = new ArrayList<>();
+        for (int i = 0; i < forecastResponse.getHeWeather5().get(0).getDaily_forecast().size(); i++) {
+            futureDays.add(new FutureDay(CodeTransformer.getWeatherIcon(Integer.parseInt(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getCond().getCode_d())),
+                    DateUtils.dayOfWeek2Str(DateUtils.strDayOfWeek(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getDate())),
+                    forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getCond().getTxt_d(),
+                    forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getTmp().getAx() + "/" +
+                            forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getTmp().getIn()));
+            Log.d("code to int is:", "" + Integer.parseInt(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getCond().getCode_d()));
+        }
+        FutureRecyclerAdapter adapter = new FutureRecyclerAdapter(this, futureDays);
+        futureRecyclr.setLayoutManager(layoutManager);
+        futureRecyclr.setAdapter(adapter);
+        adapter.setClickListener((view, position) -> Toast.makeText(MainActivity.this, "点击了第" + position + "个item", Toast.LENGTH_SHORT).show());
+        adapter.setLongClickListener((view, position) -> Toast.makeText(MainActivity.this, "长按了第" + position + "个item", Toast.LENGTH_SHORT).show());
+
     }
 
 }

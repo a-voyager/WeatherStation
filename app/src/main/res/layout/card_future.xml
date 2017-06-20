@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="6dp"
     android:layout_marginTop="12dp"
-    app:cardBackgroundColor="#539adc"
     app:contentPadding="10dp">
 
     <android.support.v7.widget.RecyclerView

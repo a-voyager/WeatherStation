@@ -31,8 +31,6 @@ public class DateUtilsTest {
     @Test
     public void fun() {
 
-        String s = DateUtils.dayOfWeek2Str(DateUtils.strDayOfWeek("2017-06-24"));
-        System.out.println(s);
 
     }
 }
