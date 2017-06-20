@@ -215,8 +215,8 @@ public class MainActivity extends BaseActivity {
             futureDays.add(new FutureDay(CodeTransformer.getWeatherIcon(Integer.parseInt(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getCond().getCode_d())),
                     DateUtils.dayOfWeek2Str(DateUtils.strDayOfWeek(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getDate())),
                     forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getCond().getTxt_d(),
-                    forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getTmp().getAx() + "/" +
-                            forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getTmp().getIn()));
+                    forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getTmp().getAx() + "℃/" +
+                            forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getTmp().getIn()+"℃"));
             Log.d("code to int is:", "" + Integer.parseInt(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getCond().getCode_d()));
         }
         FutureRecyclerAdapter adapter = new FutureRecyclerAdapter(this, futureDays);

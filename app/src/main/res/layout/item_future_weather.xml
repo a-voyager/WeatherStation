@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/img_weather_logo"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="center|start"/>
 
     <View
@@ -45,7 +45,7 @@
             android:layout_weight="1"
             android:gravity="center|start"
             android:text="多云 | 良"
-            android:textColor="#363535"
+            android:textColor="#7c7c7c"
             android:textSize="12sp"/>
     </LinearLayout>
 
