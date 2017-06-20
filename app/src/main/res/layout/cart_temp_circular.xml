@@ -1,99 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="6dp"
+    android:layout_marginTop="12dp">
 
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_gravity="center_horizontal|top"
-        android:src="@drawable/shape_circular"/>
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_circular_today_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:gravity="center"
-            android:text="四川、成都"
-            android:textColor="#fff"
-            android:textSize="14dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/shape_circular"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_weight="1"
-                    android:gravity="bottom|center"
-                    android:text="温度"
-                    android:textColor="#fff"
-                    android:textSize="12dp"/>
-
-                <TextView
-                    android:id="@+id/tv_circular_today_temp"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginRight="6dp"
-                    android:layout_weight="1"
-                    android:gravity="end|bottom"
-                    android:text="29/21"
-                    android:textColor="#fff"
-                    android:textSize="28dp"/>
-            </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:gravity="bottom"
-                android:text="|"
+                android:id="@+id/tv_circular_today_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:gravity="center"
+                android:text="四川、成都"
                 android:textColor="#fff"
-                android:textSize="20dp"/>
+                android:textSize="14dp"/>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="60dp"
+                        android:layout_weight="1"
+                        android:gravity="bottom|center"
+                        android:text="温度"
+                        android:textColor="#fff"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_circular_today_temp"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_weight="1"
+                        android:gravity="end|bottom"
+                        android:text="29/21"
+                        android:textColor="#fff"
+                        android:textSize="28dp"/>
+                </LinearLayout>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="bottom|start"
-                    android:text="PM2.5 80"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:gravity="bottom"
+                    android:text="|"
                     android:textColor="#fff"
-                    android:textSize="12dp"/>
+                    android:textSize="20dp"/>
 
-                <TextView
-                    android:id="@+id/tv_circular_today_air"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginLeft="6dp"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="start|bottom"
-                    android:text="空气良"
-                    android:textColor="#fff"
-                    android:textSize="26dp"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="bottom|start"
+                        android:text="PM2.5 80"
+                        android:textColor="#fff"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_circular_today_air"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_weight="1"
+                        android:gravity="start|bottom"
+                        android:text="空气良"
+                        android:textColor="#fff"
+                        android:textSize="26dp"/>
+                </LinearLayout>
+
             </LinearLayout>
-
         </LinearLayout>
-    </LinearLayout>
 
-</FrameLayout>
+    </FrameLayout>
+</android.support.v7.widget.CardView>
