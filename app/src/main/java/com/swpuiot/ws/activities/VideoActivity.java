@@ -22,7 +22,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import io.vov.vitamio.LibsChecker;
-import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.VideoView;
 import top.wuhaojie.lib.utils.PreferenceUtils;
 
@@ -60,14 +59,10 @@ public class VideoActivity extends BaseActivity {
         mVdVideo.setVideoPath(url);
         mTvBufferPercent.setVisibility(View.VISIBLE);
         mTvBufferPercent.setText("请稍后...");
-        mVdVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mTvBufferPercent.setVisibility(View.INVISIBLE);
-            }
-        });
+        mVdVideo.setOnPreparedListener(mp -> mTvBufferPercent.setVisibility(View.INVISIBLE));
         mVdVideo.setOnErrorListener((mp, what, extra) -> {
             Log.d(TAG, "onError: " + what);
+            mTvBufferPercent.setText("播放错误: " + what + ", " + extra);
             return true;
         });
         mVdVideo.setOnBufferingUpdateListener((mp, percent) -> {
