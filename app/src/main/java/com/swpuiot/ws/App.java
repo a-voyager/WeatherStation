@@ -1,6 +1,7 @@
 package com.swpuiot.ws;
 
 import android.app.Application;
+import android.content.Context;
 
 import top.wuhaojie.lib.image.ImageLoader;
 import top.wuhaojie.lib.image.impl.GlideImageLoader;
@@ -14,9 +15,16 @@ import top.wuhaojie.lib.image.impl.GlideImageLoader;
 
 public class App extends Application {
 
+    private static Context mContext;
+
     @Override
     public void onCreate() {
         super.onCreate();
         ImageLoader.init(GlideImageLoader.create(this));    // 初始化 ImageLoader
+        mContext = this;
+    }
+
+    public static Context getContext() {
+        return mContext;
     }
 }

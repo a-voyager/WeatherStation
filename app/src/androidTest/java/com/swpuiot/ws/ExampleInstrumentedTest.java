@@ -4,10 +4,12 @@ import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.swpuiot.ws.utils.IntentManager;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -22,5 +24,11 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.swpuiot.ws", appContext.getPackageName());
+    }
+
+
+    public void setting() {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        appContext.startActivity(IntentManager.toSettingActivity(appContext));
     }
 }

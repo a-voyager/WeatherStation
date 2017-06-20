@@ -7,7 +7,7 @@ package com.swpuiot.ws.data;
  * Version: 1.0
  */
 
-public interface CommonApi {
+interface CommonApi {
 
     String BASE_URL = "http://192.168.1.1";
 

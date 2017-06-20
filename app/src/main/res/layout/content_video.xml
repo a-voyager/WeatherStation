@@ -13,7 +13,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="12dp">
 
         <LinearLayout
@@ -27,32 +27,37 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:text="今日预报"/>
+                android:text="视频直播"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="2dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="2dp"
-                android:background="@color/light_gray"/>
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginBottom="2dp"-->
+            <!--android:layout_marginEnd="10dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginStart="10dp"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:background="@color/light_gray"/>-->
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <View
+                <io.vov.vitamio.widget.VideoView
+                    android:id="@+id/vd_video"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
 
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                <TextView
+                    android:visibility="invisible"
+                    android:id="@+id/tv_buffer_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_play"/>
+                    android:text="缓冲中...0%"
+                    android:textColor="#FFF"/>
 
             </FrameLayout>
 

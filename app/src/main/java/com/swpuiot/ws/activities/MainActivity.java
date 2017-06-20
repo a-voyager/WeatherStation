@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -214,7 +216,7 @@ public class MainActivity extends BaseActivity {
                     DateUtils.dayOfWeek2Str(DateUtils.strDayOfWeek(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getDate())),
                     forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getCond().getTxt_d(),
                     forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getTmp().getAx() + "℃/" +
-                            forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getTmp().getIn()+"℃"));
+                            forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getTmp().getIn() + "℃"));
             Log.d("code to int is:", "" + Integer.parseInt(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(i).getCond().getCode_d()));
         }
         FutureRecyclerAdapter adapter = new FutureRecyclerAdapter(this, futureDays);
@@ -225,4 +227,19 @@ public class MainActivity extends BaseActivity {
 
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_settings) {
+            startActivity(IntentManager.toSettingActivity(this));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

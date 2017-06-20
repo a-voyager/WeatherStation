@@ -2,6 +2,8 @@ package com.swpuiot.ws.data;
 
 import android.util.Log;
 
+import com.swpuiot.ws.App;
+import com.swpuiot.ws.constant.Constants;
 import com.swpuiot.ws.entities.response.ForecastResponse;
 import com.swpuiot.ws.entities.response.HourlyResponse;
 import com.swpuiot.ws.entities.response.SuggestResponse;
@@ -11,6 +13,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import top.wuhaojie.lib.http.RetrofitHttpHelper;
+import top.wuhaojie.lib.utils.PreferenceUtils;
 
 /**
  * Author: wuhaojie
@@ -28,7 +31,8 @@ public class HttpHelper {
     private final WeatherNetApi mWeatherNetApi;
 
     private HttpHelper() {
-        mCommonApi = new RetrofitHttpHelper<>(CommonApi.BASE_URL, CommonApi.class).getService();
+        String commonUrl = PreferenceUtils.getInstance(App.getContext()).getStringParam(Constants.CONFIG_KEY.NORMAL_SERVER, CommonApi.BASE_URL);
+        mCommonApi = new RetrofitHttpHelper<>(commonUrl, CommonApi.class).getService();
         mWeatherNetApi = new RetrofitHttpHelper<>(WeatherNetApi.BASE_URL, WeatherNetApi.class).getService();
     }
 
@@ -48,23 +52,32 @@ public class HttpHelper {
         mWeatherNetApi
                 .forecast(city, WeatherNetApi.KEY, language)
                 .compose(new TransThread<>())
-                .subscribe(onNext);
+                .subscribe(onNext, mErrorHandler);
     }
 
     public void suggestion(String city, String language, final Action1<? super SuggestResponse> onNext) {
         mWeatherNetApi
                 .suggestion(city, WeatherNetApi.KEY, language)
                 .compose(new TransThread<>())
-                .subscribe(onNext);
+                .subscribe(onNext, mErrorHandler);
     }
 
     public void hourly(String city, final Action1<? super HourlyResponse> onNext) {
         mWeatherNetApi
                 .hourly(city, WeatherNetApi.KEY)
                 .compose(new TransThread<>())
-                .subscribe(onNext);
+                .subscribe(onNext, mErrorHandler);
     }
 
+    private OnError mErrorHandler = new OnError();
+
+    private class OnError implements Action1<Throwable> {
+
+        @Override
+        public void call(Throwable throwable) {
+            Log.d(TAG, "call: 访问错误!" + throwable.getMessage());
+        }
+    }
 
     private class TransThread<H> implements Observable.Transformer<H, H> {
 
@@ -72,7 +85,6 @@ public class HttpHelper {
         public Observable<H> call(Observable<H> hObservable) {
             return hObservable.observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .doOnError(throwable -> Log.e(TAG, "error: " + throwable))
                     .unsubscribeOn(Schedulers.io());
         }
     }
