@@ -91,7 +91,7 @@
                     android:id="@+id/tv_wind_direction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="东偏南"
+                    android:text="西北风"
                     android:textColor="#000"
                     android:textSize="16sp"/>
 

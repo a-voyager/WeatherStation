@@ -148,8 +148,9 @@ public class MainActivity extends BaseActivity {
     private void handleServerMessage(Message message) {
         SensorData sensorData = message.getData();
         addChartValue((float) sensorData.getTemperature());
-
-        // TODO: 17-6-21 修改界面文本框
+        mTtWindowTemp.setText(sensorData.getTemperature()+"℃");
+        mTvWindSpeed.setText(sensorData.getWindSpeedValue()+"");
+        mTvWindDirection.setText(sensorData.getWindDirectionText());
     }
 
 
