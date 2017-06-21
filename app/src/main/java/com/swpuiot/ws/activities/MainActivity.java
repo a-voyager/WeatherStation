@@ -118,6 +118,11 @@ public class MainActivity extends BaseActivity {
         startActivity(IntentManager.toLightActivity(this));
     }
 
+    @OnClick(R.id.ll_window_air_hump)
+    void onHumpLayoutClick() {
+        startActivity(IntentManager.toHumpActivity(this));
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,7 +183,25 @@ public class MainActivity extends BaseActivity {
 
 
     private void handleFullInfoResponse(FullInfoResponse fullInfoResponse) {
-        // TODO: 17-6-21 填充界面
+        String meanTemp = String.valueOf(fullInfoResponse.getDate().getEan_tem());
+        mTtWindowTemp.setText(meanTemp);
+        mTtWindowWeatherStat.setText(fullInfoResponse.getDate().getDescription());
+        String lightLimit = String.valueOf(((int) fullInfoResponse.getDate().getAx_ill()))
+                + "/"
+                + String.valueOf(((int)fullInfoResponse.getDate().getIn_ill()));
+        mTtWindowAirQuality.setText(lightLimit);
+        String tempLimitt = String.valueOf(((int)fullInfoResponse.getDate().getAx_tem()))
+                + "/"
+                + String.valueOf(((int)fullInfoResponse.getDate().getIn_tem()));
+        mTtWindowAirTemp.setText(tempLimitt);
+        String humpLimit = String.valueOf(((int)fullInfoResponse.getDate().getAx_hum()))
+                + "/"
+                + String.valueOf(((int)fullInfoResponse.getDate().getIn_hum()));
+        mTtWindowAirHump.setText(humpLimit);
+        String windSpead = String.valueOf(fullInfoResponse.getDate().getWind_speed());
+        mTvWindSpeed.setText(windSpead);
+        mTvWindDirection.setText(fullInfoResponse.getDate().getWind_des());
+
     }
 
 

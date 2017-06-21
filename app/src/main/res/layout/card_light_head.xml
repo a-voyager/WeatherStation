@@ -90,7 +90,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_temp_head_stat"
+                    android:id="@+id/tv_light_value"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

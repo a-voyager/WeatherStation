@@ -1,8 +1,10 @@
 package com.swpuiot.ws.utils;
 
+import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
 
+import com.swpuiot.ws.activities.HumpActivity;
 import com.swpuiot.ws.activities.LightActivity;
 import com.swpuiot.ws.activities.SettingsActivity;
 import com.swpuiot.ws.activities.TemperatureActivity;
@@ -37,5 +39,9 @@ public class IntentManager {
 
     public static Intent toLightActivity(Context context) {
         return new Intent(context, LightActivity.class);
+    }
+
+    public static Intent toHumpActivity(Context context){
+        return new Intent(context, HumpActivity.class);
     }
 }
