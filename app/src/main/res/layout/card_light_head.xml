@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="6dp"
     android:layout_marginTop="12dp">
 
@@ -113,6 +113,31 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="外出"
+                android:textColor="#363535"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_light_out"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="适宜"
+                android:textColor="#7c7c7c"
+                android:textSize="10sp"/>
+        </LinearLayout>
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"

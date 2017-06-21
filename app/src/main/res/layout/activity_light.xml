@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="光照"/>
+            app:title="光照详情"/>
 
     </android.support.design.widget.AppBarLayout>
 
