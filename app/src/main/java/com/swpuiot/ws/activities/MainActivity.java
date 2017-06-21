@@ -1,6 +1,5 @@
 package com.swpuiot.ws.activities;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,7 +22,10 @@ import com.swpuiot.ws.base.BaseActivity;
 import com.swpuiot.ws.data.HttpHelper;
 import com.swpuiot.ws.ds.FixedQueue;
 import com.swpuiot.ws.entities.FutureDay;
+import com.swpuiot.ws.entities.Message;
+import com.swpuiot.ws.entities.SensorData;
 import com.swpuiot.ws.entities.response.ForecastResponse;
+import com.swpuiot.ws.lib.src.lib.Connector;
 import com.swpuiot.ws.ui.CropVideoView;
 import com.swpuiot.ws.utils.CodeTransformer;
 import com.swpuiot.ws.utils.DateUtils;
@@ -31,9 +33,6 @@ import com.swpuiot.ws.utils.IntentManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -115,20 +114,43 @@ public class MainActivity extends BaseActivity {
 
         drawLine();
 
-        // 每隔一秒钟 生成随机数
-        final Random random = new Random();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                addChartValue(random.nextInt(16));
-            }
-        };
-        new Timer().schedule(task, 0, 1000);
+//        // 每隔一秒钟 生成随机数
+//        final Random random = new Random();
+//        TimerTask task = new TimerTask() {
+//            @Override
+//            public void run() {
+//                addChartValue(random.nextInt(16));
+//            }
+//        };
+//        new Timer().schedule(task, 0, 1000);
 
 
         HttpHelper.get().forecast("成都", "zh", this::handleForecastResponse);
 
+        Connector<Message> connector = new Connector.Builder<Message>()
+                .setClientId("#2000")
+                .setClientTopic("app")
+                .setServerURI("tcp://114.215.144.204:61613")
+                .setMessageClassType(Message.class)
+                .build();
+        connector.init();
 
+        connector.receiveMessage(this::handleServerMessage);
+
+
+    }
+
+
+    /**
+     * 来自主服务器的数据
+     *
+     * @param message
+     */
+    private void handleServerMessage(Message message) {
+        SensorData sensorData = message.getData();
+        addChartValue((float) sensorData.getTemperature());
+
+        // TODO: 17-6-21 修改界面文本框
     }
 
 
