@@ -17,6 +17,9 @@ public class SensorData {
 
     private double light;
 
+    public SensorData() {
+    }
+
     public SensorData(double temperature, double humidity, double windDirectionValue, String windDirectionText, double windSpeedValue, double light) {
         this.temperature = temperature;
         this.humidity = humidity;
@@ -48,6 +51,30 @@ public class SensorData {
 
     public double getLight() {
         return light;
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public void setHumidity(double humidity) {
+        this.humidity = humidity;
+    }
+
+    public void setWindDirectionValue(double windDirectionValue) {
+        this.windDirectionValue = windDirectionValue;
+    }
+
+    public void setWindDirectionText(String windDirectionText) {
+        this.windDirectionText = windDirectionText;
+    }
+
+    public void setWindSpeedValue(double windSpeedValue) {
+        this.windSpeedValue = windSpeedValue;
+    }
+
+    public void setLight(double light) {
+        this.light = light;
     }
 
     @Override

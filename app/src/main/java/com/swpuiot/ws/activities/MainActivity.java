@@ -4,7 +4,10 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
@@ -30,6 +33,7 @@ import com.swpuiot.ws.entities.SensorData;
 import com.swpuiot.ws.entities.response.ForecastResponse;
 import com.swpuiot.ws.entities.response.FullInfoResponse;
 import com.swpuiot.ws.lib.src.lib.Connector;
+import com.swpuiot.ws.lib.src.lib.callback.MessageCallBack;
 import com.swpuiot.ws.ui.CropVideoView;
 import com.swpuiot.ws.utils.CodeTransformer;
 import com.swpuiot.ws.utils.DateUtils;
@@ -45,6 +49,9 @@ import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.view.LineChartView;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import top.wuhaojie.lib.utils.PreferenceUtils;
 
 
@@ -84,6 +91,10 @@ public class MainActivity extends BaseActivity {
     LineChartView lineChartView;
     @BindView(R.id.iv_curr_video)
     ImageView mIvCurrVideo;
+    @BindView(R.id.ll_window_air_temp)
+    LinearLayout mLlWindowAirTemp;
+    @BindView(R.id.c_toolbar)
+    CollapsingToolbarLayout mCToolbar;
 
     private FixedQueue<PointValue> mFixedQueue;
     private LineChartData mChartData;
@@ -129,19 +140,42 @@ public class MainActivity extends BaseActivity {
         @SuppressLint("HardwareIds") String deviceId = telephonyManager.getDeviceId();
         Log.d(TAG, "onCreate: " + deviceId);
 
-        Connector<Message> connector = new Connector.Builder<Message>()
-                .setClientId(deviceId)
-                .setClientTopic("app")
-                .setServerURI(mqttUrl)
-                .setMessageClassType(Message.class)
-                .build();
-        connector.init();
 
-        connector.receiveMessage(this::handleServerMessage);
+        Observable.fromCallable(() -> {
+            Connector<Message> connector = new Connector.Builder<Message>()
+                    .setClientId(deviceId)
+                    .setClientTopic("app")
+                    .setServerURI(mqttUrl)
+                    .setMessageClassType(Message.class)
+                    .build();
+            connector.init();
+            return connector;
+        }).subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(connector -> connector.receiveMessage(new MessageCallBack<Message>() {
+                    @Override
+                    public void onNewMessage(Message message) {
+                        mMessage = message;
+                        mHandler.sendEmptyMessage(0);
+                    }
+                }))
+                .subscribe();
+
 
         HttpHelper.get().fullInfo(this::handleFullInfoResponse);
 
     }
+
+    private Message mMessage;
+
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            handleServerMessage(mMessage);
+        }
+    };
+
 
     private void handleFullInfoResponse(FullInfoResponse fullInfoResponse) {
         // TODO: 17-6-21 填充界面
@@ -161,6 +195,7 @@ public class MainActivity extends BaseActivity {
         String s = String.valueOf(sensorData.getWindSpeedValue()) + "";
         mTvWindSpeed.setText(s);
         mTvWindDirection.setText(sensorData.getWindDirectionText());
+        mCToolbar.setTitle("新都 " + tmp);
     }
 
 

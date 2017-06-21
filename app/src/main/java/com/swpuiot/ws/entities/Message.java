@@ -14,6 +14,9 @@ public class Message {
 
     private SensorData data;
 
+    public Message() {
+    }
+
     public Message(int origin, SensorData data) {
         this.origin = origin;
         this.data = data;
@@ -25,6 +28,14 @@ public class Message {
 
     public SensorData getData() {
         return data;
+    }
+
+    public void setOrigin(int origin) {
+        this.origin = origin;
+    }
+
+    public void setData(SensorData data) {
+        this.data = data;
     }
 
     @Override
