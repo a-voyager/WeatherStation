@@ -4,6 +4,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.swpuiot.ws.data.HttpHelper;
 import com.swpuiot.ws.entities.response.ForecastResponse;
+import com.swpuiot.ws.entities.response.FullInfoResponse;
 import com.swpuiot.ws.entities.response.HourlyResponse;
 
 import org.junit.Test;
@@ -19,6 +20,18 @@ import rx.functions.Action1;
  */
 @RunWith(AndroidJUnit4.class)
 public class HttpHelperTest {
+    @Test
+    public void fullInfo() throws Exception {
+        HttpHelper.get().fullInfo(new Action1<FullInfoResponse>() {
+            @Override
+            public void call(FullInfoResponse fullInfoResponse) {
+                System.out.println(fullInfoResponse);
+            }
+        });
+        while (true);
+
+    }
+
     @Test
     public void hourly() throws Exception {
         HttpHelper.get().hourly("成都", new Action1<HourlyResponse>() {

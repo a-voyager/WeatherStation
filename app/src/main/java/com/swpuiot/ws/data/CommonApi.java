@@ -1,5 +1,10 @@
 package com.swpuiot.ws.data;
 
+import com.swpuiot.ws.entities.response.FullInfoResponse;
+
+import retrofit2.http.GET;
+import rx.Observable;
+
 /**
  * Author: wuhaojie
  * E-mail: w19961009@126.com
@@ -9,7 +14,10 @@ package com.swpuiot.ws.data;
 
 interface CommonApi {
 
-    String BASE_URL = "http://192.168.1.1";
+    String BASE_URL = "http://192.168.0.110:8080/";
 
+
+    @GET("Inf/getInf")
+    Observable<FullInfoResponse> fullInfo();
 
 }

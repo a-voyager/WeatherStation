@@ -1,11 +1,13 @@
 package com.swpuiot.ws.activities;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +28,7 @@ import com.swpuiot.ws.entities.FutureDay;
 import com.swpuiot.ws.entities.Message;
 import com.swpuiot.ws.entities.SensorData;
 import com.swpuiot.ws.entities.response.ForecastResponse;
+import com.swpuiot.ws.entities.response.FullInfoResponse;
 import com.swpuiot.ws.lib.src.lib.Connector;
 import com.swpuiot.ws.ui.CropVideoView;
 import com.swpuiot.ws.utils.CodeTransformer;
@@ -121,7 +124,13 @@ public class MainActivity extends BaseActivity {
 
         String mqttUrl = PreferenceUtils.getInstance(this).getStringParam(Constants.CONFIG_KEY.MESSAGE_SERVER, "tcp://114.215.144.204:61613");
 
+
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        @SuppressLint("HardwareIds") String deviceId = telephonyManager.getDeviceId();
+        Log.d(TAG, "onCreate: " + deviceId);
+
         Connector<Message> connector = new Connector.Builder<Message>()
+                .setClientId(deviceId)
                 .setClientTopic("app")
                 .setServerURI(mqttUrl)
                 .setMessageClassType(Message.class)
@@ -130,7 +139,12 @@ public class MainActivity extends BaseActivity {
 
         connector.receiveMessage(this::handleServerMessage);
 
+        HttpHelper.get().fullInfo(this::handleFullInfoResponse);
 
+    }
+
+    private void handleFullInfoResponse(FullInfoResponse fullInfoResponse) {
+        // TODO: 17-6-21 填充界面
     }
 
 
@@ -142,8 +156,10 @@ public class MainActivity extends BaseActivity {
     private void handleServerMessage(Message message) {
         SensorData sensorData = message.getData();
         addChartValue((float) sensorData.getTemperature());
-        mTtWindowTemp.setText(sensorData.getTemperature() + "℃");
-        mTvWindSpeed.setText(sensorData.getWindSpeedValue() + "");
+        String tmp = String.valueOf(sensorData.getTemperature()) + "℃";
+        mTtWindowTemp.setText(tmp);
+        String s = String.valueOf(sensorData.getWindSpeedValue()) + "";
+        mTvWindSpeed.setText(s);
         mTvWindDirection.setText(sensorData.getWindDirectionText());
     }
 

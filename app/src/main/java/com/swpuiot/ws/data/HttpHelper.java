@@ -5,6 +5,7 @@ import android.util.Log;
 import com.swpuiot.ws.App;
 import com.swpuiot.ws.constant.Constants;
 import com.swpuiot.ws.entities.response.ForecastResponse;
+import com.swpuiot.ws.entities.response.FullInfoResponse;
 import com.swpuiot.ws.entities.response.HourlyResponse;
 import com.swpuiot.ws.entities.response.SuggestResponse;
 
@@ -65,6 +66,13 @@ public class HttpHelper {
     public void hourly(String city, final Action1<? super HourlyResponse> onNext) {
         mWeatherNetApi
                 .hourly(city, WeatherNetApi.KEY)
+                .compose(new TransThread<>())
+                .subscribe(onNext, mErrorHandler);
+    }
+
+    public void fullInfo(final Action1<? super FullInfoResponse> onNext) {
+        mCommonApi
+                .fullInfo()
                 .compose(new TransThread<>())
                 .subscribe(onNext, mErrorHandler);
     }
