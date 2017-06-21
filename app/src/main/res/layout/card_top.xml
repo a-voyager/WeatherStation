@@ -78,7 +78,7 @@
             android:padding="6dp">
 
             <LinearLayout
-                android:id="@+id/ll_window_air_quality"
+                android:id="@+id/ll_window_light"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -104,9 +104,9 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.88"
+                        android:layout_weight="0.61"
                         android:gravity="start|bottom"
-                        android:text="PM2.5"
+                        android:text="lux"
                         android:textColor="#e6e2e2"
                         android:textSize="12dp"/>
                 </LinearLayout>
@@ -119,7 +119,7 @@
                     android:layout_marginTop="3dp"
                     android:layout_weight="1"
                     android:gravity="top|center"
-                    android:text="轻度污染"
+                    android:text="光照"
                     android:textColor="#e6e2e2"
                     android:textSize="14dp"/>
             </LinearLayout>
@@ -143,7 +143,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_weight="1.38"
+                        android:layout_weight="1.14"
                         android:gravity="end|bottom"
                         android:text="29/20"
                         android:textColor="#e6e2e2"

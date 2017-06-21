@@ -3,6 +3,7 @@ package com.swpuiot.ws.utils;
 import android.content.Context;
 import android.content.Intent;
 
+import com.swpuiot.ws.activities.LightActivity;
 import com.swpuiot.ws.activities.SettingsActivity;
 import com.swpuiot.ws.activities.TemperatureActivity;
 import com.swpuiot.ws.activities.VideoActivity;
@@ -34,4 +35,7 @@ public class IntentManager {
         return new Intent(context, SettingsActivity.class);
     }
 
+    public static Intent toLightActivity(Context context) {
+        return new Intent(context, LightActivity.class);
+    }
 }
