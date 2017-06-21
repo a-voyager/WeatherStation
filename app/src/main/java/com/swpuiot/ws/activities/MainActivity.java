@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.swpuiot.ws.R;
 import com.swpuiot.ws.adapter.FutureRecyclerAdapter;
 import com.swpuiot.ws.base.BaseActivity;
+import com.swpuiot.ws.constant.Constants;
 import com.swpuiot.ws.data.HttpHelper;
 import com.swpuiot.ws.ds.FixedQueue;
 import com.swpuiot.ws.entities.FutureDay;
@@ -41,6 +42,7 @@ import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
 import lecho.lib.hellocharts.view.LineChartView;
+import top.wuhaojie.lib.utils.PreferenceUtils;
 
 
 public class MainActivity extends BaseActivity {
@@ -114,22 +116,14 @@ public class MainActivity extends BaseActivity {
 
         drawLine();
 
-//        // 每隔一秒钟 生成随机数
-//        final Random random = new Random();
-//        TimerTask task = new TimerTask() {
-//            @Override
-//            public void run() {
-//                addChartValue(random.nextInt(16));
-//            }
-//        };
-//        new Timer().schedule(task, 0, 1000);
-
 
         HttpHelper.get().forecast("成都", "zh", this::handleForecastResponse);
 
+        String mqttUrl = PreferenceUtils.getInstance(this).getStringParam(Constants.CONFIG_KEY.MESSAGE_SERVER, "tcp://114.215.144.204:61613");
+
         Connector<Message> connector = new Connector.Builder<Message>()
                 .setClientTopic("app")
-                .setServerURI("tcp://114.215.144.204:61613")
+                .setServerURI(mqttUrl)
                 .setMessageClassType(Message.class)
                 .build();
         connector.init();
@@ -148,8 +142,8 @@ public class MainActivity extends BaseActivity {
     private void handleServerMessage(Message message) {
         SensorData sensorData = message.getData();
         addChartValue((float) sensorData.getTemperature());
-        mTtWindowTemp.setText(sensorData.getTemperature()+"℃");
-        mTvWindSpeed.setText(sensorData.getWindSpeedValue()+"");
+        mTtWindowTemp.setText(sensorData.getTemperature() + "℃");
+        mTvWindSpeed.setText(sensorData.getWindSpeedValue() + "");
         mTvWindDirection.setText(sensorData.getWindDirectionText());
     }
 

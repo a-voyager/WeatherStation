@@ -6,5 +6,6 @@
     <string name="title_activity_settings">设置</string>
     <string name="media_addr">rtmp://115.159.95.196:1935/oflaDemo/stream1497576771208</string>
     <string name="title_activity_light">LightActivity</string>
+    <string name="mqtt_addr">tcp://114.215.144.204:61613</string>
 
 </resources>
