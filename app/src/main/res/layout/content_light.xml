@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.swpuiot.ws.activities.LightActivity"
     tools:showIn="@layout/activity_light">
 
-    <include layout="@layout/card_light_head"/>
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/card_light_head"/>
+
+        <include layout="@layout/cart_light_circular"/>
+
+        <include layout="@layout/card_light_history"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
