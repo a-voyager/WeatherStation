@@ -19,7 +19,15 @@ public class SettingsActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void initViews() {
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getFragmentManager().beginTransaction()
                 .replace(R.id.fl_setting, InnerFragment.newInstance())
                 .commit();

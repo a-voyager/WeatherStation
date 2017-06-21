@@ -1,5 +1,6 @@
 package com.swpuiot.ws.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,7 +59,7 @@ public class MainActivity extends BaseActivity {
     TextView mTtWindowAirQuality;
     @BindView(R.id.tt_window_air_stat)
     TextView mTtWindowAirStat;
-    @BindView(R.id.ll_window_air_quality)
+    @BindView(R.id.ll_window_light)
     LinearLayout mLlWindowAirQuality;
     @BindView(R.id.tt_window_air_temp)
     TextView mTtWindowAirTemp;
@@ -95,6 +96,11 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.card_video)
     void onVideoCardClick() {
         startActivity(IntentManager.toVideoActivity(this));
+    }
+
+    @OnClick(R.id.ll_window_light)
+    void onLightLayoutClick() {
+        startActivity(IntentManager.toLightActivity(this));
     }
 
     @Override
@@ -225,6 +231,8 @@ public class MainActivity extends BaseActivity {
         adapter.setClickListener((view, position) -> Toast.makeText(MainActivity.this, "点击了第" + position + "个item", Toast.LENGTH_SHORT).show());
         adapter.setLongClickListener((view, position) -> Toast.makeText(MainActivity.this, "长按了第" + position + "个item", Toast.LENGTH_SHORT).show());
 
+        mTtWindowAirTemp.setText(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(0).getTmp().getAx() + "/" +
+                forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(0).getTmp().getIn());
     }
 
 

@@ -37,6 +37,11 @@
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".activities.LightActivity"
+            android:label="@string/title_activity_light"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

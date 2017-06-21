@@ -84,10 +84,7 @@ public class TemperatureActivity extends BaseActivity {
             Log.d(TAG, "suggestResponse is a null object");
             return;
         }
-        Toast.makeText(TemperatureActivity.this, "suggestResponse not null", Toast.LENGTH_SHORT).show();
         List<Advise> advises = new ArrayList<>();
-//            advises.add(new Advise(R.drawable.ic_dayu, suggestResponse.getHeWeather5().get(0).getSuggestion().getAir().getBrf(),
-//                    suggestResponse.getHeWeather5().get(0).getSuggestion().getAir().getTxt()));
         advises.add(new Advise(R.drawable.ic_300, "阳光浴—" + suggestResponse.getHeWeather5().get(0).getSuggestion().getComf().getBrf(),
                 suggestResponse.getHeWeather5().get(0).getSuggestion().getComf().getTxt()));
         advises.add(new Advise(R.drawable.ic_multi_cities, "洗车—" + suggestResponse.getHeWeather5().get(0).getSuggestion().getCw().getBrf(),

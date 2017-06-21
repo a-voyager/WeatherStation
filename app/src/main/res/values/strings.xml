@@ -5,5 +5,6 @@
     <string name="title_activity_video">实时气象</string>
     <string name="title_activity_settings">设置</string>
     <string name="media_addr">rtmp://115.159.95.196:1935/oflaDemo/stream1497576771208</string>
+    <string name="title_activity_light">LightActivity</string>
 
 </resources>
