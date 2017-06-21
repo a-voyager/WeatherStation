@@ -94,7 +94,9 @@ public class Connector<T> {
             public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
                 T t = JsonUtils.fromJson(mqttMessage.toString(), mMessageClassType);
                 if (mMessageCallBacks != null && !mMessageCallBacks.isEmpty())
-                    mMessageCallBacks.forEach(messageCallBack -> messageCallBack.onNewMessage(t));
+                    for (MessageCallBack<T> messageCallBack : mMessageCallBacks) {
+                        messageCallBack.onNewMessage(t);
+                    }
             }
 
             @Override

@@ -128,7 +128,6 @@ public class MainActivity extends BaseActivity {
         HttpHelper.get().forecast("成都", "zh", this::handleForecastResponse);
 
         Connector<Message> connector = new Connector.Builder<Message>()
-                .setClientId("#2000")
                 .setClientTopic("app")
                 .setServerURI("tcp://114.215.144.204:61613")
                 .setMessageClassType(Message.class)
