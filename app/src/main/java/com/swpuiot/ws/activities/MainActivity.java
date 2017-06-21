@@ -225,6 +225,8 @@ public class MainActivity extends BaseActivity {
         adapter.setClickListener((view, position) -> Toast.makeText(MainActivity.this, "点击了第" + position + "个item", Toast.LENGTH_SHORT).show());
         adapter.setLongClickListener((view, position) -> Toast.makeText(MainActivity.this, "长按了第" + position + "个item", Toast.LENGTH_SHORT).show());
 
+        mTtWindowAirTemp.setText(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(0).getTmp().getAx() + "/" +
+                forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(0).getTmp().getIn());
     }
 
 
