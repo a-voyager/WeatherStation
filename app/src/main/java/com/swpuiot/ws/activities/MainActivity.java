@@ -19,7 +19,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.swpuiot.ws.R;
 import com.swpuiot.ws.adapter.FutureRecyclerAdapter;
@@ -340,8 +339,8 @@ public class MainActivity extends BaseActivity {
         FutureRecyclerAdapter adapter = new FutureRecyclerAdapter(this, futureDays);
         futureRecyclr.setLayoutManager(layoutManager);
         futureRecyclr.setAdapter(adapter);
-        adapter.setClickListener((view, position) -> Toast.makeText(MainActivity.this, "点击了第" + position + "个item", Toast.LENGTH_SHORT).show());
-        adapter.setLongClickListener((view, position) -> Toast.makeText(MainActivity.this, "长按了第" + position + "个item", Toast.LENGTH_SHORT).show());
+//        adapter.setClickListener((view, position) -> Toast.makeText(MainActivity.this, "点击了第" + position + "个item", Toast.LENGTH_SHORT).show());
+//        adapter.setLongClickListener((view, position) -> Toast.makeText(MainActivity.this, "长按了第" + position + "个item", Toast.LENGTH_SHORT).show());
 
         mTtWindowAirTemp.setText(forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(0).getTmp().getAx() + "/" +
                 forecastResponse.getHeWeather5().get(0).getDaily_forecast().get(0).getTmp().getIn());

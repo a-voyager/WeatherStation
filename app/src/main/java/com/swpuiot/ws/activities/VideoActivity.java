@@ -68,7 +68,7 @@ public class VideoActivity extends BaseActivity {
         });
         mVdVideo.setOnBufferingUpdateListener((mp, percent) -> mTvPercentCenter.setText("" + percent + ""));
         mVdVideo.setHardwareDecoder(true);
-        mVdVideo.setVideoLayout(VIDEO_LAYOUT_SCALE, (float) (16.0 / 9));
+        mVdVideo.setVideoLayout(VIDEO_LAYOUT_SCALE, (float) (4.0 / 3));
         mVdVideo.start();
     }
 
