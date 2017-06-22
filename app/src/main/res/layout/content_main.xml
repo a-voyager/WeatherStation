@@ -22,6 +22,8 @@
 
         <include layout="@layout/cart_video"/>
 
+        <include layout="@layout/card_forest_tomorrow"/>
+
         <include layout="@layout/card_future"/>
 
 

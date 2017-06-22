@@ -8,6 +8,7 @@ import com.swpuiot.ws.entities.response.ForecastResponse;
 import com.swpuiot.ws.entities.response.FullInfoResponse;
 import com.swpuiot.ws.entities.response.HourlyResponse;
 import com.swpuiot.ws.entities.response.SuggestResponse;
+import com.swpuiot.ws.entities.response.TomorrowForestResponse;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -73,6 +74,13 @@ public class HttpHelper {
     public void fullInfo(final Action1<? super FullInfoResponse> onNext) {
         mCommonApi
                 .fullInfo()
+                .compose(new TransThread<>())
+                .subscribe(onNext, mErrorHandler);
+    }
+
+    public void tomorrow(final Action1<? super TomorrowForestResponse> onNext) {
+        mCommonApi
+                .tomorrow()
                 .compose(new TransThread<>())
                 .subscribe(onNext, mErrorHandler);
     }
