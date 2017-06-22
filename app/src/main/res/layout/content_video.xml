@@ -51,13 +51,22 @@
                     android:layout_gravity="center"/>
 
                 <TextView
-                    android:visibility="invisible"
-                    android:id="@+id/tv_buffer_percent"
+                    android:id="@+id/tv_wait"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="缓冲中...0%"
-                    android:textColor="#FFF"/>
+                    android:text="请稍后..."
+                    android:textColor="#FFF"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:id="@+id/tv_buffer_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:text="19"
+                    android:textColor="#999"
+                    android:textSize="12sp"/>
 
             </FrameLayout>
 

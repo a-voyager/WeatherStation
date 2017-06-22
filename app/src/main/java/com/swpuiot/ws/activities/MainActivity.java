@@ -32,6 +32,7 @@ import com.swpuiot.ws.entities.Message;
 import com.swpuiot.ws.entities.SensorData;
 import com.swpuiot.ws.entities.response.ForecastResponse;
 import com.swpuiot.ws.entities.response.FullInfoResponse;
+import com.swpuiot.ws.entities.response.TomorrowForestResponse;
 import com.swpuiot.ws.lib.src.lib.Connector;
 import com.swpuiot.ws.lib.src.lib.callback.MessageCallBack;
 import com.swpuiot.ws.ui.CropVideoView;
@@ -95,6 +96,16 @@ public class MainActivity extends BaseActivity {
     LinearLayout mLlWindowAirTemp;
     @BindView(R.id.c_toolbar)
     CollapsingToolbarLayout mCToolbar;
+    @BindView(R.id.iv_weather_icon)
+    ImageView mIvWeatherIcon;
+    @BindView(R.id.tv_weather_text)
+    TextView mTvWeatherText;
+    @BindView(R.id.tv_weather_tmp)
+    TextView mTvWeatherTmp;
+    @BindView(R.id.tv_weather_max_min)
+    TextView mTvWeatherMaxMin;
+    @BindView(R.id.tv_weather_wind)
+    TextView mTvWeatherWind;
 
     private FixedQueue<PointValue> mFixedQueue;
     private LineChartData mChartData;
@@ -168,6 +179,17 @@ public class MainActivity extends BaseActivity {
 
 
         HttpHelper.get().fullInfo(this::handleFullInfoResponse);
+        HttpHelper.get().tomorrow(this::handleTomorrowResponse);
+
+    }
+
+    private void handleTomorrowResponse(TomorrowForestResponse tomorrowForestResponse) {
+
+        mIvWeatherIcon.setImageResource(CodeTransformer.getWeatherIcon(tomorrowForestResponse.getFlag()));
+        mTvWeatherText.setText(tomorrowForestResponse.getDescription());
+        mTvWeatherTmp.setText("" + tomorrowForestResponse.getEanTemperature() + "℃");
+        mTvWeatherMaxMin.setText("Tmp: ↑" + tomorrowForestResponse.getAxTemperature() + "    ↓" + tomorrowForestResponse.getInTemperature() + "");
+        mTvWeatherWind.setText("D: " + tomorrowForestResponse.getWindDirection() + "   S: " + tomorrowForestResponse.getWindForce());
 
     }
 
@@ -183,20 +205,20 @@ public class MainActivity extends BaseActivity {
 
 
     private void handleFullInfoResponse(FullInfoResponse fullInfoResponse) {
-        String meanTemp = String.valueOf(fullInfoResponse.getDate().getEan_tem());
-        mTtWindowTemp.setText(meanTemp);
+        String meanTemp = String.valueOf((int) fullInfoResponse.getDate().getEan_tem());
+        mTtWindowTemp.setText(meanTemp + "℃");
         mTtWindowWeatherStat.setText(fullInfoResponse.getDate().getDescription());
         String lightLimit = String.valueOf(((int) fullInfoResponse.getDate().getAx_ill()))
                 + "/"
-                + String.valueOf(((int)fullInfoResponse.getDate().getIn_ill()));
+                + String.valueOf(((int) fullInfoResponse.getDate().getIn_ill()));
         mTtWindowAirQuality.setText(lightLimit);
-        String tempLimitt = String.valueOf(((int)fullInfoResponse.getDate().getAx_tem()))
+        String tempLimitt = String.valueOf(((int) fullInfoResponse.getDate().getAx_tem()))
                 + "/"
-                + String.valueOf(((int)fullInfoResponse.getDate().getIn_tem()));
+                + String.valueOf(((int) fullInfoResponse.getDate().getIn_tem()));
         mTtWindowAirTemp.setText(tempLimitt);
-        String humpLimit = String.valueOf(((int)fullInfoResponse.getDate().getAx_hum()))
+        String humpLimit = String.valueOf(((int) fullInfoResponse.getDate().getAx_hum()))
                 + "/"
-                + String.valueOf(((int)fullInfoResponse.getDate().getIn_hum()));
+                + String.valueOf(((int) fullInfoResponse.getDate().getIn_hum()));
         mTtWindowAirHump.setText(humpLimit);
         String windSpead = String.valueOf(fullInfoResponse.getDate().getWind_speed());
         mTvWindSpeed.setText(windSpead);
@@ -213,7 +235,7 @@ public class MainActivity extends BaseActivity {
     private void handleServerMessage(Message message) {
         SensorData sensorData = message.getData();
         addChartValue((float) sensorData.getTemperature());
-        String tmp = String.valueOf(sensorData.getTemperature()) + "℃";
+        String tmp = String.valueOf((int) sensorData.getTemperature()) + "℃";
         mTtWindowTemp.setText(tmp);
         String s = String.valueOf(sensorData.getWindSpeedValue()) + "";
         mTvWindSpeed.setText(s);
@@ -279,7 +301,7 @@ public class MainActivity extends BaseActivity {
 
 
         Axis axisY = new Axis();  //Y轴
-        axisY.setMaxLabelChars(3); //默认是3，只能看最后三个数字
+        axisY.setMaxLabelChars(5); //默认是3，只能看最后三个数字
         axisY.setTextSize(6);
         axisY.setHasSeparationLine(false);
         mChartData.setAxisYLeft(axisY);

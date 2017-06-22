@@ -6,6 +6,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -25,8 +26,6 @@ import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.widget.VideoView;
 import top.wuhaojie.lib.utils.PreferenceUtils;
 
-import static io.vov.vitamio.MediaPlayer.MEDIA_INFO_BUFFERING_END;
-import static io.vov.vitamio.MediaPlayer.MEDIA_INFO_BUFFERING_START;
 import static io.vov.vitamio.widget.VideoView.VIDEO_LAYOUT_SCALE;
 
 public class VideoActivity extends BaseActivity {
@@ -37,8 +36,10 @@ public class VideoActivity extends BaseActivity {
     RecyclerView mRvHourly;
     @BindView(R.id.vd_video)
     VideoView mVdVideo;
+    @BindView(R.id.tv_wait)
+    TextView mTvWaitCenter;
     @BindView(R.id.tv_buffer_percent)
-    TextView mTvBufferPercent;
+    TextView mTvPercentCenter;
     private HourlyListAdapter mHourlyListAdapter;
 
     @Override
@@ -55,34 +56,26 @@ public class VideoActivity extends BaseActivity {
     private void initVideo() {
         if (!LibsChecker.checkVitamioLibs(this))
             return;
-        String url = PreferenceUtils.getInstance(this).getStringParam(Constants.CONFIG_KEY.MEDIA_SERVER, Constants.MEDIA_SERVER_URL);
+        String url = PreferenceUtils.getInstance(this).getStringParam(Constants.CONFIG_KEY.MEDIA_SERVER, Constants.MEDIA_SERVER_URL) + "0";
         mVdVideo.setVideoPath(url);
-        mTvBufferPercent.setVisibility(View.VISIBLE);
-        mTvBufferPercent.setText("请稍后...");
-        mVdVideo.setOnPreparedListener(mp -> mTvBufferPercent.setVisibility(View.INVISIBLE));
+        mTvWaitCenter.setVisibility(View.VISIBLE);
+        mTvWaitCenter.setText("请稍后...");
+        mVdVideo.setOnPreparedListener(mp -> mTvWaitCenter.setVisibility(View.INVISIBLE));
         mVdVideo.setOnErrorListener((mp, what, extra) -> {
             Log.d(TAG, "onError: " + what);
-            mTvBufferPercent.setText("播放错误: " + what + ", " + extra);
+            mTvWaitCenter.setText("播放错误: " + what + ", " + extra);
             return true;
         });
-        mVdVideo.setOnBufferingUpdateListener((mp, percent) -> {
-//            mTvBufferPercent.setText("缓冲中..." + percent + "%");
-        });
-        mVdVideo.setOnInfoListener((mp, what, extra) -> {
-            switch (what) {
-                case MEDIA_INFO_BUFFERING_START:
-                    Log.d(TAG, "onInfo: BUFFERING_START");
-//                    mTvBufferPercent.setVisibility(View.VISIBLE);
-                    break;
-                case MEDIA_INFO_BUFFERING_END:
-                    Log.d(TAG, "onInfo: BUFFERING_END");
-//                    mTvBufferPercent.setVisibility(View.INVISIBLE);
-                    break;
-            }
-            return true;
-        });
+        mVdVideo.setOnBufferingUpdateListener((mp, percent) -> mTvPercentCenter.setText("" + percent + ""));
         mVdVideo.setHardwareDecoder(true);
         mVdVideo.setVideoLayout(VIDEO_LAYOUT_SCALE, (float) (16.0 / 9));
+        mVdVideo.start();
+    }
+
+
+    private void play(int i) {
+        String url = PreferenceUtils.getInstance(this).getStringParam(Constants.CONFIG_KEY.MEDIA_SERVER, Constants.MEDIA_SERVER_URL) + i;
+        mVdVideo.setVideoPath(url);
         mVdVideo.start();
     }
 
@@ -118,9 +111,32 @@ public class VideoActivity extends BaseActivity {
 
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_video, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) finish();
-        return super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.action_video_1:
+                play(1);
+                break;
+            case R.id.action_video_2:
+                play(2);
+                break;
+            case R.id.action_video_3:
+                play(3);
+                break;
+            case R.id.action_video_4:
+                play(4);
+                break;
+        }
+
+        return true;
     }
 
     @Override
