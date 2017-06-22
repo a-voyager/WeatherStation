@@ -54,7 +54,7 @@
                         android:textSize="12dp"/>
 
                     <TextView
-                        android:id="@+id/tv_light_circular_value"
+                        android:id="@+id/tv_hump_circular_value"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginRight="12dp"
@@ -90,7 +90,7 @@
                         android:textSize="12dp"/>
 
                     <TextView
-                        android:id="@+id/tv_light_grade_stat"
+                        android:id="@+id/tv_hump_grade_stat"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginLeft="12dp"
